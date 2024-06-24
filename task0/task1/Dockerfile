@@ -4,19 +4,23 @@ FROM python:3.8-slim-buster
 # Set the working directory in the container to /app
 WORKDIR /app
 
+# Update and install dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy the current directory contents into the container at /app
 COPY. /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Install Flask using pip3
+RUN pip3 install Flask
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Make port 5252 available to the world outside this container
+EXPOSE 5252
 
 # Define environment variable
-ENV NAME World
+ENV FLASK_APP=api.py
 
-# Run app.py when the container launches
-CMD ["python3", "app.py"]
+# Run api.py when the container launches
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5252"]
 
-RUN apt-get upgrade -y
