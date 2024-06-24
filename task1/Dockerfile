@@ -10,7 +10,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container at /app
-COPY. /app
+COPY . /app
 
 # Install Flask using pip3
 RUN pip3 install Flask
