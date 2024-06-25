@@ -1,13 +1,10 @@
-# Use the latest version of Ubuntu as a parent image;
-
+# Use the latest version of Ubuntu as a parent image
 FROM ubuntu:22.04
 
-#update the package lists for upgrades for packages that need upgrading;
-
+#update the package lists for upgrades for packages that need upgrading
 RUN apt-get update
 
-#upgrade all the installed packages;
-
+#upgrade all the installed packages
 RUN apt-get upgrade -y
 
 #install Flask using pip3
