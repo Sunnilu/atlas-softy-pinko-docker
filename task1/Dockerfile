@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim-buster
+FROM ubuntu:22.04
 
 # Set the working directory in the container to /app
 WORKDIR /app
