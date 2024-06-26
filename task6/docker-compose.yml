@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web: # This is the Flask backend
+    build:
+      context: ./back-end
+       dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      -./back-end:/app
+    environment:
+      - FLASK_APP=app.py
+
+  nginx: # This is the Nginx reverse proxy
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      -./nginx/nginx.conf:/etc/nginx/nginx.conf
+      -./front-end/build:/usr/share/nginx/html
+
+  front-end: # This is the front-end
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    volumes:
+      -./front-end/src:/app/src
+    environment:
+      - REACT_APP_BACKEND_URL=http://web:5000
