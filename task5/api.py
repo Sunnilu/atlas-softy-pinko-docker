@@ -1,5 +1,5 @@
 from flask import Flask # type: ignore
-
+from flask_cors import CORS
 app = Flask(__name__)
 
 @app.route('/api/hello')
