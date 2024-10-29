@@ -1,19 +1,11 @@
-# Use the latest version of Ubuntu as a parent image
-FROM ubuntu:22.04
+# Use the latest version of nginx
+FROM nginx:latest
 
-#update the package lists for upgrades for packages that need upgrading
-RUN apt-get update
+# Copy the softy-pinko-front-end files to the nginx HTML directory
+COPY softy-pinko-front-end /var/www/html/softy-pinko-front-end
 
-#upgrade all the installed packages
-RUN apt-get upgrade -y
+# Copy the Nginx configuration file
+COPY softy-pinko-front-end.conf /etc/nginx/conf.d/default.conf
 
-#install Flask using pip3
-RUN pip3 install flask
-
-WORKDIR  /app
-
-COPY . /app
-
-EXPOSE 5252
-
-CMD ["python3", "api.py"]
+# Expose port 80
+EXPOSE 80
