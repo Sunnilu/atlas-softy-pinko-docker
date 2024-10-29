@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 # Copy the softy-pinko-front-end files to the nginx HTML directory
-COPY softy-pinko-front-end /var/www/html/softy-pinko-front-end
+COPY api.py, app/api.py
 
 # Copy the Nginx configuration file
 COPY softy-pinko-front-end.conf /etc/nginx/conf.d/default.conf
