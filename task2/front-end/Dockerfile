@@ -1,15 +1,19 @@
-load_module modules/ngx_http_js_module.so;
+# Use the latest version of Ubuntu as a parent image
+FROM ubuntu:22.04
 
-events {}
+#update the package lists for upgrades for packages that need upgrading
+RUN apt-get update
 
-http {
-    js_import http.js;
+#upgrade all the installed packages
+RUN apt-get upgrade -y
 
-    server {
-        listen 8000;
+#install Flask using pip3
+RUN pip3 install flask
 
-        location / {
-            js_content http.hello;
-        }
-    }
-}
+WORKDIR  /app
+
+COPY . /app
+
+EXPOSE 5252
+
+CMD ["python3", "api.py"]
