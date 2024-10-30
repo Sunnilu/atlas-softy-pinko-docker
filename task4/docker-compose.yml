@@ -4,12 +4,12 @@ services:
   frontend:
     image: atlassoftypinkodocker-frontend
     build:
-      context: ./front-end
+      context: ./back-end
       dockerfile: Dockerfile
 
   backend:
     image: atlassoftypinkodocker-backend
     build:
-      context: ./back-end
+      context: ./front-end
       dockerfile: Dockerfile
 
