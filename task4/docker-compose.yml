@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: atlassoftypinkodocker-frontend
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+
+  backend:
+    image: atlassoftypinkodocker-backend
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+
