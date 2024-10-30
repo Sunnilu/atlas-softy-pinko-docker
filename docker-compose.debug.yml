@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  atlassoftypinkodocker:
+    image: atlassoftypinkodocker
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m docker build -f ./Dockerfile -t softy-pinko: task0 "]
+    ports:
+      -5678-5678
