@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.rute('/api/hello')
+@app.route('/api/hello')
 def hello_world():
     return 'Hello, World'
 
