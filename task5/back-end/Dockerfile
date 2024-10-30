@@ -1,27 +1,23 @@
-# Use the latest version of Nginx
-FROM nginx:latest
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim-buster
 
-# Copy the proxy configuration file to the correct location
-COPY proxy.conf /etc/nginx/conf.d/default.conf
+# Set the working directory in the container to /app
+WORKDIR /app
 
-# Expose port 80
-EXPOSE 80
-# Use the latest version of Ubuntu as a parent image
-FROM ubuntu:22.04
+# Update and install dependencies
+RUN apt-get update && \
+    apt-get install -y python3-pip && \
+    pip3 install -r requirements.txt && \
+    rm -rf /var/lib/apt/lists/*
 
-#update the package lists for upgrades for packages that need upgrading
-RUN apt-get update
+# Copy the rest of the current directory contents into the container at /app
+COPY . .
 
-#upgrade all the installed packages
-RUN apt-get upgrade -y
+# Make port 9000 available to the world outside this container
+EXPOSE 9000
 
-#install Flask using pip3
-RUN pip3 install flask
+# Define environment variable
+ENV FLASK_APP=api.py
 
-WORKDIR  /app
-
-COPY . /app
-
-EXPOSE 5252
-
-CMD ["python3", "api.py"]
+# Run api.py when the container launches
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=9000"]
