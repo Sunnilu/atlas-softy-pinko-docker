@@ -4,12 +4,16 @@ services:
   frontend:
     image: atlassoftypinkodocker-frontend
     build:
-      context: ./back-end
+      context: ./front-end
       dockerfile: Dockerfile
+    ports:
+      - "5252:5252"
 
   backend:
     image: atlassoftypinkodocker-backend
     build:
-      context: ./front-end
+      context: ./back-end
       dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
 
